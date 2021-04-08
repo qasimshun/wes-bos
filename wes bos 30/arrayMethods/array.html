@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array methods</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        var div = document.querySelector('div');
+        var inventors = [{firt: 'qasim', last:'nawab', born:1997, died: 2100},
+        {firt: 'prince', last:'steve', born:1691, died: 1800},
+        {firt: 'shay', last:'jay', born:1895, died: 2000},
+        {firt: 'nikola', last:'tesla', born:1592, died: 1700},];
+        var classics = inventors.filter(item => item.born<1600);
+        console.table(classics);
+        var names = inventors.map(item => `${item.firt} ${item.last}`);
+        console.log(names);
+        var youngest = inventors.sort((firstItem, secondItem) => firstItem.born > secondItem.born ? -1:1);
+        console.table(youngest);
+        var something = inventors.reduce((total, item)=>{
+            return total + (item.died - item.born);
+        },0);
+        console.log(something);
+        var oldest = inventors.sort((firstItem, secondItem) => {
+            const firstGuy = firstItem.born - firstItem.died;
+            const secondGuy = secondItem.born - secondItem.died;
+            return firstGuy > secondGuy ? 1: -1;
+        });
+        console.table(oldest);
+        
+    </script>
+</body>
+</html>

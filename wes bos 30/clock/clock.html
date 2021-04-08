@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple clock</title>
+    <style>
+        .round {
+            width: 300px;
+            height: 300px;
+            background: crimson;
+            border-radius: 50%;
+            opacity: .3;
+            position: relative;
+        }
+        div div {
+            width: 50%;
+            height: 6px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            transform: rotate(90deg);
+            transform-origin: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="round">
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+    </div>
+    <script>
+        var firstHand = document.querySelector('.first');
+        var secondHand = document.querySelector('.second');
+        var thirdHand = document.querySelector('.third');
+        
+        function stretch(){
+            var currenTime = new Date();
+        var seconds = currenTime.getSeconds();
+        var secondsDegree = ((seconds/60)*360)+90;
+        var minutes = currenTime.getMinutes();
+        var minutesDegree = ((minutes/60)*360)+90;
+        var hours = currenTime.getHours();
+        var hoursDegree = ((hours/60)*360)+90;
+            firstHand.style.transform = `rotate(${secondsDegree}deg)`;
+            secondHand.style.transform = `rotate(${minutes}deg)`;
+            thirdHand.style.transform = `rotate(${hours}deg)`;
+        }
+        setInterval(stretch,100);
+    </script>
+</body>
+</html>

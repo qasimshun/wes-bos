@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css variables</title>
+    <style>
+
+        :root {
+            --base: rgb(83, 11, 83);
+            --spacing: 10px;
+            --blur: 2px;
+        }
+        span {
+            color: var(--base);
+            font-size: 3em;
+        }
+        label {
+            font-size: 1.25em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .control {
+            margin: 20px;
+            padding: 10px;
+        }
+
+        img {
+            background: var(--base);
+            padding: var(--spacing);
+            filter: blur(var(--blur));
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        this is for changing css variables with <span>javascript</span>
+    </h1>
+    <div class="control">
+        <label for="spacing">spacing:</label>
+        <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+        <label for="blur">blur:</label>
+        <input type="range" name="blur" min="0" max="25" data-sizing="px">
+
+        <label for="base"></label>
+        <input type="color" name="base" value="#fff">
+    </div>
+    <div>
+        <img src="26.jpg" alt="david beckam">
+    </div>
+
+    <script>
+        var inputs = document.querySelectorAll('input');
+
+        function giveUpdate(){
+            var wonder = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`,this.value+wonder);
+        }
+        inputs.forEach(result =>{
+            result.addEventListener('change', giveUpdate);
+        });
+        inputs.forEach(result => {
+            result.addEventListener('mousemove', giveUpdate);
+        })
+    </script>
+</body>
+</html>
