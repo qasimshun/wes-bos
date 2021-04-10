@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image gallery</title>
+    <style>
+        .big-box {
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .image-box {
+            flex: 1;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-size: cover;
+            background-position: center;
+            transition: all 200ms ease;
+        }
+        .image-box > * {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1 0 auto;
+            background: pink;
+            width: 100%;
+        }
+        .img1 {
+            background-image: url(geran-de-klerk-Kcxv7Gz7wmw-unsplash.jpg);
+        }
+        .img2 {
+            background-image: url(kyle-johnson-TEZZzuQTt8g-unsplash.jpg);
+        }
+        .img3 {
+            background-image: url(sanjeevan-satheeskumar-MG8c-4n1QVE-unsplash.jpg);
+        }
+        .img4 {
+            background-image: url(svyatoslav-romanov-r38u2Uq1AXk-unsplash.jpg);
+        }
+        .img5 {
+            background-image: url(zane-lee-IHj0xtWtLKE-unsplash.jpg);
+        }
+
+        .image-box > p:first-child {
+            transform: translateY(-200%);
+        }
+        .image-box > p:last-child {
+            transform: translateY(200%);
+        }
+        .image-box > p.active {
+            transform: translateY(0);
+        }
+
+        .image-box.open {
+            font-size: 3em;
+            flex: 5;
+        }
+    </style>
+</head>
+<body>
+    <div class="big-box">
+        <div class="image-box img1">
+            <p>experience</p>
+            <p>It</p>
+            <p>How</p>
+        </div>
+        <div class="image-box img2">
+            <p>experience</p>
+            <p>It</p>
+            <p>How</p>
+        </div>
+        <div class="image-box img3">
+            <p>experience</p>
+            <p>It</p>
+            <p>How</p>
+        </div>
+        <div class="image-box img4">
+            <p>experience</p>
+            <p>It</p>
+            <p>How</p>
+        </div>
+        <div class="image-box img5">
+            <p>experience</p>
+            <p>It</p>
+            <p>How</p>
+        </div>
+    </div>
+    <script>
+        var box = document.querySelectorAll('.image-box');
+        function addClass(){
+            this.classList.toggle('open');
+        }
+        box.forEach(event =>{
+            event.addEventListener('click',addClass);
+        });
+        function giveParagraph(e){
+            if(e.propertyName.includes('flex')){
+                this.firstElementChild.classList.toggle('active');
+                this.lastElementChild.classList.toggle('active');
+            }
+        }
+        box.forEach(event =>{
+            event.addEventListener('transitionend',giveParagraph);
+        });
+    </script>
+</body>
+</html>
