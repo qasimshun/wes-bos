@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random exercises</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+        }
+
+        .video-box {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        video {
+            height: auto;
+            max-width: 100%;
+            max-height: 100vh;
+        }
+
+        .content {
+            background-image: linear-gradient(to right, pink, blue);
+            width: 600px;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(60%);
+            transition: all 500ms ease;
+        }
+        .content:hover {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="video-box">
+    <video src="pexels-tony-schnagl-5527786.mp4" autoplay controls></video>
+    <div class="content">
+        <h1>something is there</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia, et?</p>
+        <a href="#">learn more</a>
+    </div>
+    </div>
+</body>
+</html>
