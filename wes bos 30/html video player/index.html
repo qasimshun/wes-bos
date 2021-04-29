@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html 5 video player</title>
+    <style>
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 100vw;
+            min-height: 100vh;
+        }
+
+        .video-box {
+            width: 600px;
+            height: 600px;
+        }
+
+        .inner-box {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .progress-bar {
+            width: 15%;
+            height: 15px;
+            background: red;
+        }
+
+        .bar-box {
+            width: 100%;
+            background: rgba(0, 0, 255, 0.308);
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="flex">
+    <div class="video-box">
+        <video src="mixkit-man-doing-push-ups-using-dumbbells-40248.mp4"></video>
+        <div class="inner-box">
+            <div class="bar-box">
+                <div class="progress-bar"></div>
+            </div>
+            <button class="play">play</button>
+            <input type="range" name="volume" class="playback" min="0" max="1" step="0.05" value="1">
+            <input type="range" name="playbackRate" class="playback" min="0.5" max="2" step="0.1" value="1">
+            <button data-skip="-5" class="skip">-5s</button>
+            <button data-skip="5" class="skip">5s</button>
+        </div>
+    </div>
+
+    <script>
+        var video = document.querySelector('video');
+        var progresss = document.querySelector('.progress-bar');
+        var playbtn = document.querySelector('.play');
+        var volume = document.querySelector('#volume');
+        var playback = document.querySelectorAll('.playback');
+        var skiping = document.querySelectorAll('.skip');
+        var progressBox = document.querySelector('.bar-box')
+        // add functionality
+
+        function toggleVideo(){
+            if(video.paused){
+                video.play();
+                playbtn.textContent = 'pause';
+            }
+            else if(!video.paused) {
+                video.pause();
+                playbtn.textContent = 'play';
+            }
+        }
+
+        function skip(){
+            video.currentTime += parseFloat(this.dataset.skip);
+        }
+
+        function speedChange(){
+            video[this.name] = this.value;
+            console.log(this.name, this.value)
+        }
+
+        function updateVideo(){
+            let someTime = (video.currentTime/video.duration)*100;
+            progresss.style.width = `${someTime}%`;
+        }
+        function scrub(e){
+            const scrubTime = (e.offsetX/progressBox.offsetWidth)*video.duration;
+            video.currentTime = scrubTime;
+        }
+
+        // add event listeners
+        video.addEventListener('click', toggleVideo);
+        playbtn.addEventListener('click', toggleVideo);
+        playback.forEach(ele =>{ele.addEventListener('change', speedChange);});
+        skiping.forEach(ele =>{
+            ele.addEventListener('click', skip);
+        });
+        video.addEventListener('timeupdate', updateVideo);
+        progressBox.addEventListener('click', scrub);
+    </script>
+</body>
+</html>
