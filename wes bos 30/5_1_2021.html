@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flexbox</title>
+    <style>
+        .box {
+            width: 500px;
+            min-height: 500px;
+            padding: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid grey;
+        }
+        .content {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="plates">
+            <li></li>
+        </ul>
+        <form class="">
+            <input type="text" name="item" class="gg" placeholder="item name" required>
+            <input type="submit" value="+ add item">
+        </form>
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        const list = document.querySelector('.plates');
+        var gg = document.querySelector('.gg');
+        let items = [];
+
+        function addItem(e){
+            e.preventDefault();
+            const another = gg.value;
+            var word = {
+                text: another,
+                done: false
+            }
+            items.push(word);
+            populateList(items,list);
+            this.reset();
+        }
+
+        function populateList(items=[], list){
+            list.innerHTML = items.map((ele, index) =>{
+                return `
+                <li>
+                    <input type='checkbox' id='item${index}' data-index=${index} ${ele.done ? "checked" : ""}></input>
+                    <label for=>${ele.text}</label>
+                </li>`;
+            }).join('');
+        }
+
+        form.addEventListener('submit', addItem);
+    </script>
+</body>
+</html>
